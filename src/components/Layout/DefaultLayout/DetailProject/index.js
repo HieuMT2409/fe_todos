@@ -18,7 +18,7 @@ function DetailProject() {
       </div>
 
       {/* detail project */}
-      <div className="border shadow-xl rounded-xl mt-8 mx-6 h-1/2 p-4">
+      <div className="border shadow-xl rounded-xl mt-8 mx-6 h-[470px] p-4">
         <div className="text-2xl font-semibold pt-2 pb-3">Project name</div>
         <textarea onChange={handleChange} value={'descript for project'} className="border text-semi shadow-lg min-h-32 rounded-xl p-2 w-full outline-none">
           Descript for project

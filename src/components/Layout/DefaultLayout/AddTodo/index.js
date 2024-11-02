@@ -2,7 +2,7 @@ import { MdOutlineCancel } from "react-icons/md";
 import { postTodosAPI } from "../../../../api/todos";
 import { useState } from "react";
 
-function AddTodo({ onClose }) {
+function AddTodo({ onClose, onAdd }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("note");
@@ -22,6 +22,7 @@ function AddTodo({ onClose }) {
     };
     try {
       const response = await postTodosAPI(newTodo);
+      onAdd(response);
       onClose();
     } catch (error) {
       console.error("Error adding todo:", error);

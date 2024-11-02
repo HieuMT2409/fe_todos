@@ -11,6 +11,10 @@ export const getTodosAPI = () => {
     return axiosClient.get(`${END_POINT.TODOS}`);
 }
 
+export const getTodobyID = (id) => {
+    return axiosClient.get(`${END_POINT.TODOS}/${id}`);
+}
+
 export const postTodosAPI = (todo) => {
     return axiosClient.post(`${END_POINT.CREAT}`, todo);
 }

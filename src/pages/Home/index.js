@@ -16,11 +16,15 @@ function Home() {
   // call api
   useEffect(() => {
     fetchData();
-  }, [todolist]);
+  }, []);
 
   const fetchData = async () => {
     const data = await getTodosAPI();
     setTodolist(data);
+  };
+
+  const handleTodo = async () => {
+    fetchData();
   };
 
   return (
@@ -45,9 +49,9 @@ function Home() {
       {/* render todolist - todo list */}
       <div className="mt-10">
         <div className="font-semibold">TODO LISTS</div>
-        <div className="flex justify-between mr-10">
+        <div className={`flex justify-between ${todolist ? "hover:overflow-x-scroll" : "" } pl-0 p-4`}>
           {todolist.map((todo, index) => (
-            <TodoNote key={index} nameProject={todo.title} descript={todo.description} />
+            <TodoNote key={index} todos={todo} onDelete={handleTodo} onUpdate={handleTodo}/>
           ))}
         </div>
       </div>
@@ -86,7 +90,7 @@ function Home() {
 
       {/* Add new todolist */}
       <div className="absolute top-0 left-0 z-40">
-        {isAdd && <AddTodo onClose={() => setIsAdd(false)} />}
+        {isAdd && <AddTodo onClose={() => setIsAdd(false)} onAdd={handleTodo} />}
       </div>
     </div>
   );
