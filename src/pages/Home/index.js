@@ -4,10 +4,12 @@ import TodoProject from "../../components/TodoProject";
 import AddTodo from "../../components/Layout/DefaultLayout/AddTodo";
 import { useEffect, useState } from "react";
 import { getTodosAPI } from "../../api/todos";
+import { getProjectsAPI } from "../../api/projects";
 
 function Home() {
   const [isAdd, setIsAdd] = useState(false);
   const [todolist, setTodolist] = useState([]);
+  const [projectlist, setProjectlist] = useState([]);
 
   const handleClick = () => {
     setIsAdd(true);
@@ -16,15 +18,24 @@ function Home() {
   // call api
   useEffect(() => {
     fetchData();
+    fetchDataProject();
   }, []);
 
+  // todos
   const fetchData = async () => {
     const data = await getTodosAPI();
     setTodolist(data);
   };
 
-  const handleTodo = async () => {
+  const handleLoad = async () => {
     fetchData();
+    fetchDataProject();
+  };
+
+  // projects
+  const fetchDataProject = async () => {
+    const data = await getProjectsAPI();
+    setProjectlist(data);
   };
 
   return (
@@ -49,9 +60,9 @@ function Home() {
       {/* render todolist - todo list */}
       <div className="mt-10">
         <div className="font-semibold">TODO LISTS</div>
-        <div className={`flex justify-between ${todolist ? "hover:overflow-x-scroll" : "" } pl-0 p-4`}>
+        <div className={`flex justify-between ${todolist ? "hover:overflow-x-scroll" : "disabled:hover:overflow-x-scroll" } pl-0 p-4`}>
           {todolist.map((todo, index) => (
-            <TodoNote key={index} todos={todo} onDelete={handleTodo} onUpdate={handleTodo}/>
+            <TodoNote key={index} todos={todo} onDelete={handleLoad} onUpdate={handleLoad}/>
           ))}
         </div>
       </div>
@@ -59,11 +70,12 @@ function Home() {
       {/* render todolist - project*/}
       <div className="mt-10">
         <div className="font-semibold">Projects</div>
-        <div className="flex justify-between mr-10">
-          <TodoProject />
-          <TodoProject />
-          <TodoProject />
-          <TodoProject />
+        <div className={`flex justify-between mr-10 ${projectlist ? "hover:overflow-x-scroll" : "disabled:hover:overflow-x-scroll" } pl-0 p-4`}>
+          {
+            projectlist.map((project, index) => (
+              <TodoProject key={index} projects={project}/>
+            ))
+          }
         </div>
       </div>
 
@@ -90,7 +102,7 @@ function Home() {
 
       {/* Add new todolist */}
       <div className="absolute top-0 left-0 z-40">
-        {isAdd && <AddTodo onClose={() => setIsAdd(false)} onAdd={handleTodo} />}
+        {isAdd && <AddTodo onClose={() => setIsAdd(false)} onAdd={handleLoad} />}
       </div>
     </div>
   );
