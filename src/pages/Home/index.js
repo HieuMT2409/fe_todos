@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { getTodosAPI } from "../../api/todos";
 import { getProjectsAPI } from "../../api/projects";
 
-function Home() {
+function Home({onSelectedProject, onDeleteProject}) {
   const [isAdd, setIsAdd] = useState(false);
   const [todolist, setTodolist] = useState([]);
   const [projectlist, setProjectlist] = useState([]);
@@ -73,7 +73,7 @@ function Home() {
         <div className={`flex justify-between mr-10 ${projectlist ? "hover:overflow-x-scroll" : "disabled:hover:overflow-x-scroll" } pl-0 p-4`}>
           {
             projectlist.map((project, index) => (
-              <TodoProject key={index} projects={project}/>
+              <TodoProject key={index} projects={project} onSelected={() => onSelectedProject(project)} onDelete={onDeleteProject}/>
             ))
           }
         </div>

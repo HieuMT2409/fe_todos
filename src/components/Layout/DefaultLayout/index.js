@@ -2,8 +2,16 @@ import Sidebar from "../../SideBar";
 import Search from "../../Search";
 import Home from "../../../pages/Home";
 import DetailProject from "./DetailProject";
+import { useState } from "react";
 
 function DefaultLayout() {
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [deleteProject, setDeleteProject] = useState(null);
+
+  const handleSelectProject = (project) => {
+    setSelectedProject(project);
+  };
+
   return (
     <div className="relative flex bg-bg">
       {/* sidebar */}
@@ -17,12 +25,12 @@ function DefaultLayout() {
           </span>
         </div>
         <div>
-          <Home />
+          <Home onSelectedProject={handleSelectProject} onDeleteProject={() => setDeleteProject(true)}/>
         </div>
       </div>
 
       {/* detail todolist */}
-      <DetailProject/>
+      <DetailProject project={selectedProject} onDelete={() => setDeleteProject(true)}/>
     </div>
   );
 }
