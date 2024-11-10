@@ -1,8 +1,8 @@
 import images from "../../assets/images";
 
-function TodoProject({projects, onSelected}) {
+function TodoProject({projects, onSelected, isDarkMode}) {
     return ( 
-        <div onClick={onSelected} className="border shadow-xl bg-white w-1/4 py-2 px-4 mt-4 mx-2 rounded-xl min-h-48 cursor-pointer">
+        <div onClick={onSelected} className={`border shadow-xl ${isDarkMode ? "dark:bg-slate-600 dark:border-slate-600" :""} bg-white w-1/4 py-2 px-4 mt-4 mx-2 rounded-xl min-h-48 cursor-pointer`}>
           <div>
             <img alt="todo" className="rounded-xl mt-2 max-w-40" src={images.todo}/>
           </div>

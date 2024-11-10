@@ -4,7 +4,7 @@ import User from "../../../User";
 import images from "../../../../assets/images";
 import { deleteProjectAPI } from "../../../../api/projects";
 
-function DetailProject({ project, onDelete }) {
+function DetailProject({ project, onDelete, isDarkMode, toggleDarkMode }) {
 
   const handleChange = () => {
     console.log("handle change descript");
@@ -20,10 +20,10 @@ function DetailProject({ project, onDelete }) {
   }
 
   return (
-    <div className="bg-white w-1/4 drop-shadow-2xl">
+    <div className={`bg-white w-1/4 drop-shadow-2xl ${isDarkMode ? "dark:bg-slate-900 dark:text-white" : ""}`}>
       {/* lightmode and user */}
       <div className="flex items-center justify-end mt-4">
-        <LightMode />
+        <LightMode isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode}/>
         <span className="border border-bg bg-bg h-8 mx-2"></span>
         <User />
       </div>
@@ -72,14 +72,14 @@ function DetailProject({ project, onDelete }) {
 
             {/* button done and save*/}
             <div className="flex">
-              <button className="border bg-button rounded-xl py-4 px-10 mr-3 hover:bg-avatar">
+              <button className="border bg-button rounded-xl py-4 px-10 mr-3 hover:bg-avatar dark:bg-avatar dark:hover:bg-button|">
                 Save
               </button>
-              <button onClick={() => handleDelete(project.id)} className="border bg-button rounded-xl py-4 px-10 hover:bg-cancel">
+              <button onClick={() => handleDelete(project.id)} className="border bg-button rounded-xl py-4 px-10 hover:bg-cancel dark:bg-avatar dark:hover:bg-button|">
                 Delete
               </button>
             </div>
-            <button className="border bg-button rounded-xl py-4 px-20 mt-4 hover:bg-completed">
+            <button className="border bg-button rounded-xl py-4 px-20 mt-4 hover:bg-completed dark:bg-avatar dark:hover:bg-button|">
               Mask a done
             </button>
           </div>

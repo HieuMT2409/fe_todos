@@ -1,10 +1,10 @@
 import { FiSearch } from "react-icons/fi";
 
-function Search() {
+function Search({isDarkMode}) {
   return (
     <div
       className={
-        "flex items-center border-2 rounded-full p-2 ml-2 text-sm shadow-xl bg-white text-slate-400"
+        `flex items-center border-2 rounded-full p-2 ml-2 text-sm shadow-xl bg-white text-slate-400`
       }
     >
       <span className="ml-2">

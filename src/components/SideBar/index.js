@@ -3,7 +3,7 @@ import Button from "../Button";
 import Tab from "../Tab";
 import images from "../../assets/images";
 
-function SideBar() {
+function SideBar({isDarkMode}) {
   const [isClick, setIsClick] = useState(1);
   const [activeBg, setActiveBg] = useState('button');
 
@@ -23,7 +23,7 @@ function SideBar() {
   };
 
   return (
-    <div className="w-64 bg-white pr-8">
+    <div className={`w-64 bg-white pr-8 ${isDarkMode ? "dark:bg-slate-900 dark:text-white" : ""}`}>
       {/* logo */}
       <div className="-mt-8 -ml-8">
         <img src={images.logo} alt="doingforfuture" />
@@ -38,6 +38,7 @@ function SideBar() {
             title={"Home"}
             icon={true}
             backgroundColor={activeBg === 'button' & isClick === 1}
+            isDarkMode={isDarkMode}
           />
         </div>
         <div
@@ -48,6 +49,7 @@ function SideBar() {
             title={"Setting"}
             icon={false}
             backgroundColor={activeBg === 'button' & isClick === 2}
+            isDarkMode={isDarkMode}
           />
         </div>
       </div>
@@ -65,6 +67,7 @@ function SideBar() {
             <Tab
               title={"Work"}
               backgroundColor={activeBg === 'tab' & isClickList === 0}
+              isDarkMode={isDarkMode}
             />
           </div>
           <div
@@ -74,6 +77,7 @@ function SideBar() {
             <Tab
               title={"Learning"}
               backgroundColor={activeBg === 'tab' & isClickList === 1}
+              isDarkMode={isDarkMode}
             />
           </div>
           <div
@@ -83,6 +87,7 @@ function SideBar() {
             <Tab
               title={"Freelance"}
               backgroundColor={activeBg === 'tab' & isClickList === 2}
+              isDarkMode={isDarkMode}
             />
           </div>
         </div>
@@ -92,9 +97,9 @@ function SideBar() {
       <div className="mt-4 ml-6">
         <div className="text-3xl">Tags</div>
         <div className="min-h-56">
-          <Tab title={"work"} />
-          <Tab title={"daily"} />
-          <Tab title={"priority"} />
+          <Tab title={"work"} isDarkMode={isDarkMode} />
+          <Tab title={"daily"} isDarkMode={isDarkMode} />
+          <Tab title={"priority"} isDarkMode={isDarkMode} />
         </div>
       </div>
 

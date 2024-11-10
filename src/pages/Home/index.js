@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { getTodosAPI } from "../../api/todos";
 import { getProjectsAPI } from "../../api/projects";
 
-function Home({onSelectedProject, onDeleteProject}) {
+function Home({onSelectedProject, onDeleteProject, isDarkMode}) {
   const [isAdd, setIsAdd] = useState(false);
   const [todolist, setTodolist] = useState([]);
   const [projectlist, setProjectlist] = useState([]);
@@ -39,7 +39,7 @@ function Home({onSelectedProject, onDeleteProject}) {
   };
 
   return (
-    <div className="mt-10 pl-4 w-full">
+    <div className={`mt-10 pl-4 w-full ${isDarkMode ? "dark:bg-slate-800 dark:text-white" : ""}`}>
       {/* Introduce */}
       <div className="flex">
         <div className="flex flex-col flex-1">
@@ -50,7 +50,7 @@ function Home({onSelectedProject, onDeleteProject}) {
         </div>
         <button
           onClick={() => handleClick()}
-          className="flex bg-button hover:bg-avatar items-center border shadow-xl rounded-xl px-6 mr-10"
+          className="flex bg-button hover:bg-avatar items-center border shadow-xl rounded-xl px-6 mr-10 dark:bg-avatar dark:hover:bg-button"
         >
           <IoIosAdd />
           <span className="text-lg">New Activity</span>
@@ -58,11 +58,11 @@ function Home({onSelectedProject, onDeleteProject}) {
       </div>
 
       {/* render todolist - todo list */}
-      <div className="mt-10">
+      <div className={`mt-10`}>
         <div className="font-semibold">TODO LISTS</div>
         <div className={`flex justify-between ${todolist ? "hover:overflow-x-scroll" : "disabled:hover:overflow-x-scroll" } pl-0 p-4`}>
           {todolist.map((todo, index) => (
-            <TodoNote key={index} todos={todo} onDelete={handleLoad} onUpdate={handleLoad}/>
+            <TodoNote key={index} todos={todo} onDelete={handleLoad} onUpdate={handleLoad} isDarkMode={isDarkMode}/>
           ))}
         </div>
       </div>
@@ -73,7 +73,7 @@ function Home({onSelectedProject, onDeleteProject}) {
         <div className={`flex justify-between mr-10 ${projectlist ? "hover:overflow-x-scroll" : "disabled:hover:overflow-x-scroll" } pl-0 p-4`}>
           {
             projectlist.map((project, index) => (
-              <TodoProject key={index} projects={project} onSelected={() => onSelectedProject(project)} onDelete={onDeleteProject}/>
+              <TodoProject key={index} projects={project} onSelected={() => onSelectedProject(project)} onDelete={onDeleteProject} isDarkMode={isDarkMode}/>
             ))
           }
         </div>
@@ -83,17 +83,17 @@ function Home({onSelectedProject, onDeleteProject}) {
       <div className="mt-10">
         <div className="font-semibold">Reminder</div>
         <div className="flex items-center justify-between text-xl mr-10 my-4">
-          <div className="flex w-1/3 py-2 rounded-xl bg-white mr-4">
+          <div className={`flex w-1/3 py-2 rounded-xl bg-white mr-4 ${isDarkMode ? "dark:bg-slate-600" :""} cursor-pointer`}>
             <div className="border border-todo border-2 mr-4"></div>
             <div>ToDo</div>
           </div>
 
-          <div className="flex w-1/3 py-2 rounded-xl bg-white mr-4">
+          <div className={`flex w-1/3 py-2 rounded-xl bg-white mr-4 ${isDarkMode ? "dark:bg-slate-600" :""} cursor-pointer`}>
             <div className="border border-doing border-2 mr-4"></div>
             <div>Doing</div>
           </div>
 
-          <div className="flex w-1/3 py-2 rounded-xl bg-white mr-4">
+          <div className={`flex w-1/3 py-2 rounded-xl bg-white mr-4 ${isDarkMode ? "dark:bg-slate-600" :""} cursor-pointer`}>
             <div className="border border-completed border-2 mr-4"></div>
             <div>Completed</div>
           </div>

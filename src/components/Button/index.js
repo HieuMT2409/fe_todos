@@ -2,10 +2,10 @@ import { FaHome } from "react-icons/fa";
 import { RiSettings5Fill } from "react-icons/ri";
 import { IoMdAdd } from "react-icons/io";
 
-function Button({ title, icon, backgroundColor, iconAdd }) {
+function Button({ title, icon, backgroundColor, iconAdd, isDarkMode }) {
   return (
     <div
-      className={`${backgroundColor ? "bg-button" : "bg-white"} hover:bg-avatar cursor-pointer flex items-center text-start py-4 pr-32 pl-6 max-w-52 ${iconAdd ? 'rounded-full' :'rounded-xl'} text-xl`}
+      className={`${backgroundColor ? "bg-button dark:bg-avatar dark:hover:bg-button" : (isDarkMode ? "bg-slate-900 dark:hover:bg-button" : "bg-white")} hover:bg-avatar cursor-pointer flex items-center text-start py-4 pr-32 pl-6 max-w-52 ${iconAdd ? 'rounded-full' :'rounded-xl'} text-xl`}
     >
       {iconAdd ? (
         <div>

@@ -2,7 +2,7 @@ import { TbCheck } from "react-icons/tb";
 import { GoTrash } from "react-icons/go";
 import { deleteTodoAPI, getTodobyID, updateTodoAPI } from "../../api/todos";
 
-function TodoNote({todos, onDelete, onUpdate}) {
+function TodoNote({todos, onDelete, onUpdate, isDarkMode}) {
 
     const handleTrash = async (id) => {
       try {
@@ -29,7 +29,7 @@ function TodoNote({todos, onDelete, onUpdate}) {
     }
 
     return ( 
-        <div className={`border shadow-xl ${todos.completed ? "bg-bg" : "bg-white"} min-w-64 py-2 px-4 m-4 rounded-xl`}>
+        <div className={`border shadow-xl ${todos.completed ? "bg-bg" : isDarkMode ? "dark:bg-slate-600 dark:border-slate-600" :"bg-white"} min-w-64 py-2 px-4 m-4 rounded-xl`}>
           <div className="text-sm mt-2">
             <span className={`mr-4 rounded-md py-1 px-2 ${todos.completed ? "line-through text-gray-500 bg-bg" : "bg-tag"}`}>{todos.tag ? todos.tag : "tag"}</span>
             <span className={`text-semi ${todos.completed ? "line-through text-gray-500" : ""}`}>{todos.list ? todos.list : "list"}</span>
